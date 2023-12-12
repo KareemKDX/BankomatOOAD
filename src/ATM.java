@@ -5,36 +5,19 @@ public class ATM {
 
     public static void main(String[] args) {
 
-       BankHandler bankHandler = new BankHandler();
+        Customer customer1 = new Customer("Jakob Armandsson");
+        Customer customer2 = new Customer("Robin Halvardsson");
+        Customer customer3 = new Customer("Josefine Ullevi");
 
-        Customer customer1 = new Customer();
-
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Vänligen skriv in ditt namn");
-
-        String customerName = scan.nextLine();
-
-        BankHandler bank = new BankHandler();
-        //bank.createAccount();
-
-        customer1.setName(customerName);
-
-        System.out.println("Vad vill du göra? UTTAG/INSÄTTNING/");
-        String customerChoice = scan.nextLine();
-
-        if (customerChoice.equalsIgnoreCase("UTTAG")) {
-            System.out.println("Hur mycket vill du ta ut?");
-
-            int customerDepositAmount = scan.nextInt();
-
-
-        }
+        BankHandler handler1 = new BankHandler(customer1);
+        BankHandler handler2 = new BankHandler(customer2);
+        BankHandler handler3= new BankHandler(customer3);
 
 
 
 
+    }
+}
 
 
-    }}
 
