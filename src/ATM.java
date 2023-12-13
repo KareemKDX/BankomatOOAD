@@ -13,6 +13,8 @@ public class ATM {
         BankHandler handler2 = new BankHandler(customer2);
         BankHandler handler3= new BankHandler(customer3);
 
+        handler1.userStartMenu();
+
 
 
 
