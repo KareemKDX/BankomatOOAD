@@ -44,7 +44,7 @@ public class BankHandler implements BankManagerInterface {
 
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Vad vill du göra? 1. Insättning 2. Uttag 3. Se Sparkonto");
+        System.out.println("Vad vill du göra? 1. Insättning 2. Uttag 3. Se Sparkonto 4. Se räntekonto");
         int userChoiche = scanner.nextInt();
 
         if (userChoiche == 1) ;
