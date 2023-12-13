@@ -6,41 +6,27 @@ import java.util.List;
 
 public class TransactionHistory {
 
-    private final List<Transaction> TransactionList;
+    private final List<String> TransactionList;
 
     public TransactionHistory() {
         this.TransactionList = new ArrayList<>();
     }
 
     public void addTransaction(String type, double amount) {
-        TransactionList.add(new Transaction(type, amount));
-    }
+        Date time = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd MMM");
+        String transaction = type + ": " + amount + "kr" + " Klockan: " + dateFormat.format(time);
+        TransactionList.add(transaction);
 
+
+    }
     public void printTransactionHistory() {
         System.out.println("Transaktionshistorik:");
-        for (Transaction transaction : TransactionList) {
+        for (String transaction : TransactionList) {
             System.out.println(transaction);
         }
     }
-
-
-    private static class Transaction {
-        private String type;
-        private double amount;
-        Date time;
-
-        public Transaction(String type, double amount) {
-            this.type = type;
-            this.amount = amount;
-            this.time = new Date();
-        }
-        @Override
-        public String toString() {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd MMM");
-            return  type + ": " + amount +"kr"  + " Klockan: " + dateFormat.format(time);
-        }
-
-    }
-
 }
+
+
 
