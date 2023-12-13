@@ -35,7 +35,17 @@ public class BankHandler implements BankManagerInterface {
 
         public void userStartMenu() {
 
-            Scanner scan = new Scanner(System.in);
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Vad vill du göra? 1. Insättning 2. Uttag 3. Sparkonto");
+            int userChoiche = scanner.nextInt();
+
+            if(userChoiche == 1); {
+                deposit(500);
+
+            }
+
+
 
         }
     }
