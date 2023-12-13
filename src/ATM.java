@@ -13,9 +13,11 @@ public class ATM {
         BankHandler handler2 = BankHandler.getInstance(customer2);
         BankHandler handler3 = BankHandler.getInstance(customer3);
 
-        handler1.userStartMenu();
 
         handler1.userStartMenu();
+
+
+
 
 
 
