@@ -19,6 +19,8 @@ public class BankHandler implements BankManagerInterface {
     private double balanceSavingsAccount;
     private double balance;
     private Customer accountHolder;
+    TransactionHistory history = new TransactionHistory();
+    private String uttag = "Uttag";
     private static Map<Customer, BankHandler> instances = new HashMap<>();
     private BankHandler(Customer accountHolder) {
         this.accountHolder = accountHolder;
@@ -36,6 +38,7 @@ public class BankHandler implements BankManagerInterface {
         if (amount > 0) {
             balance += amount;
             System.out.println("Insättning: " + amount + "Nytt värde konto" + balance);
+            history.addTransaction("Insättning", amount);
         } else {
             System.out.println("Invalid deposit amount.");
         }
@@ -45,6 +48,8 @@ public class BankHandler implements BankManagerInterface {
             if (amount > 0 && amount <= balance) {
                 balance -= amount;
                 System.out.println("Uttag: " + amount + " . Nytt värde konto: " + balance);
+                history.addTransaction("Uttag", amount);
+
             } else {
                 System.out.println("Gick inte ta ut pengar. För lite saldo för vald summa");
             }
@@ -89,10 +94,7 @@ public class BankHandler implements BankManagerInterface {
                 System.out.println("Hur mycket vill du sätta in?");
                 double userDepositSum = scanner.nextDouble();
                 deposit(userDepositSum);
-
                 goBackToStartMenu();
-
-
             }
          else if  (userChoiche == 2)
         {
@@ -111,8 +113,6 @@ public class BankHandler implements BankManagerInterface {
                 double userSum = scanner.nextDouble();
                 depositSaving(userSum);
                 goBackToStartMenu();
-
-
             }
 
             if (user1 == 1) {
@@ -123,12 +123,12 @@ public class BankHandler implements BankManagerInterface {
             }
 
         }
-
-
-
-
+        else if (userChoiche == 7) {
+            history.printTransactionHistory();
+        }
     }
 
+    //Metod för att kalla på startmenyn inom if-satserna.
     public void goBackToStartMenu() {
        Scanner scanner = new Scanner(System.in);
         System.out.println("Vill du gå tillbaka till start-menyn? 1. JA 2. NEJ");
