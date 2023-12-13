@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,12 +20,16 @@ public class BankHandler implements BankManagerInterface {
     private double balanceSavingsAccount;
     private double balance;
     private Customer accountHolder;
-    private static Map<Customer, BankHandler> instances = new HashMap<>();
+    private static BankHandler instance;
     private BankHandler(Customer accountHolder) {
         this.accountHolder = accountHolder;
     }
+
     public static BankHandler getInstance(Customer accountHolder) {
-        return instances.computeIfAbsent(accountHolder, BankHandler::new);
+        if (instance == null) {
+            instance = new BankHandler(accountHolder);
+        }
+        return instance;
     }
 
     public double getBalance() {
@@ -73,55 +78,38 @@ public class BankHandler implements BankManagerInterface {
 
     }
 
-    public void userStartMenu() {
-
-        System.out.println("Välkommen till Banken: Nuvarande saldo: " + getBalance());
-
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Vad vill du göra? \n 1. Insättning \n 2. Uttag \n 3. Se Sparkonto \n 4. Se räntekonto \n 5. Ta lån \n 6. Ansökan bankomatkort \n 7. Kontohistorik"
-           + "  \n 8. Kundsupport" );
-
-        int userChoiche = scanner.nextInt();
-
-        if (userChoiche == 1)
-            {
-                System.out.println("Hur mycket vill du sätta in?");
-                double userDepositSum = scanner.nextDouble();
+    public void userStartMenu(int selectedOption) {
+        if (selectedOption == 1) {
+            String userInput = JOptionPane.showInputDialog("Hur mycket vill du sätta in?");
+            if (userInput != null) {
+                double userDepositSum = Double.parseDouble(userInput);
                 deposit(userDepositSum);
-
-                goBackToStartMenu();
-
-
             }
-         else if  (userChoiche == 2)
-        {
-            System.out.println("Hur mycket vill du ta ut?");
-            double userWithdrawSum = scanner.nextDouble();
-            withdraw(userWithdrawSum);
-        }
-        else if (userChoiche == 3)
-        {
-            System.out.println("Aktuellt saldo Sparkonto: ");
-            System.out.println("Vad vill du göra? 1. Ta ut från konto 2. Överför till konto");
-            int user1 = scanner.nextInt();
-            if(user1 == 2) {
-
-                System.out.println("Ange summa att överföra: ");
-                double userSum = scanner.nextDouble();
-                depositSaving(userSum);
-                goBackToStartMenu();
-
-
+        } else if (selectedOption == 2) {
+            String userInput = JOptionPane.showInputDialog("Hur mycket vill du ta ut?");
+            if (userInput != null) {
+                double userWithdrawSum = Double.parseDouble(userInput);
+                withdraw(userWithdrawSum);
             }
+        } else if (selectedOption == 3) {
+            int user1 = JOptionPane.showOptionDialog(null, "Aktuellt saldo Sparkonto:", "Select an option",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"1. Ta ut från konto", "2. Överför till konto"}, null);
 
-            if (user1 == 1) {
-                System.out.println("Ange summa att ta ut: ");
-                double userAmountWithdraw = scanner.nextDouble();
-                withdrawSaving(userAmountWithdraw);
-                goBackToStartMenu();
+            if (user1 == JOptionPane.YES_OPTION) {
+                String userInput = JOptionPane.showInputDialog("Ange summa att ta ut:");
+                if (userInput != null) {
+                    double userAmountWithdraw = Double.parseDouble(userInput);
+                    withdrawSaving(userAmountWithdraw);
+
+                }
+            } else if (user1 == JOptionPane.NO_OPTION) {
+                String userInput = JOptionPane.showInputDialog("Ange summa att överföra:");
+                if (userInput != null) {
+                    double userSum = Double.parseDouble(userInput);
+                    depositSaving(userSum);
+
+                }
             }
-
         }
 
 
@@ -130,14 +118,12 @@ public class BankHandler implements BankManagerInterface {
     }
 
     public void goBackToStartMenu() {
-       Scanner scanner = new Scanner(System.in);
-        System.out.println("Vill du gå tillbaka till start-menyn? 1. JA 2. NEJ");
-        int user = scanner.nextInt();
+        int user = JOptionPane.showOptionDialog(null, "Vill du gå tillbaka till start-menyn?", "Välj alternativ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
-        if(user == 1) {
-            userStartMenu();
-        }
-        else {
+        if (user == JOptionPane.YES_OPTION) {
+            new BankGUI(instance, accountHolder);
+        } else {
             System.out.println("Tack och välkommen åter");
             System.exit(0);
         }

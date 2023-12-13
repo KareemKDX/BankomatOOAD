@@ -5,25 +5,17 @@ public class ATM {
 
     public static void main(String[] args) {
 
-        Customer customer1 = new Customer("Jakob Armandsson");
-        Customer customer2 = new Customer("Robin Halvardsson");
-        Customer customer3 = new Customer("Josefine Ullevi");
+        String name = JOptionPane.showInputDialog(null, "Ange ditt namn:", "Bankomaten", JOptionPane.PLAIN_MESSAGE);
 
-        BankHandler handler1 = BankHandler.getInstance(customer1);
-        BankHandler handler2 = BankHandler.getInstance(customer2);
-        BankHandler handler3 = BankHandler.getInstance(customer3);
-
-
-        handler1.userStartMenu();
-
-
-
-
-
-
-
-
-
+        if (name != null && !name.isEmpty()) {
+            SwingUtilities.invokeLater(() -> {
+                Customer customer = new Customer(name);
+                BankHandler bankHandler = BankHandler.getInstance(customer);
+                new BankGUI(bankHandler, customer);
+            });
+        } else {
+           JOptionPane.showMessageDialog(null,"Du måste skriva in ditt namn!");
+        }
 
     }
 }
