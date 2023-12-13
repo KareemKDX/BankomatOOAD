@@ -9,9 +9,11 @@ public class ATM {
         Customer customer2 = new Customer("Robin Halvardsson");
         Customer customer3 = new Customer("Josefine Ullevi");
 
-        BankHandler handler1 = new BankHandler(customer1);
-        BankHandler handler2 = new BankHandler(customer2);
-        BankHandler handler3= new BankHandler(customer3);
+        BankHandler handler1 = BankHandler.getInstance(customer1);
+        BankHandler handler2 = BankHandler.getInstance(customer2);
+        BankHandler handler3 = BankHandler.getInstance(customer3);
+
+        handler1.userStartMenu();
 
         handler1.userStartMenu();
 
