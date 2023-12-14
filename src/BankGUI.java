@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class BankGUI extends JFrame implements ActionListener{
     JPanel panel = new JPanel();
     JLabel label = new JLabel("Välkommen");
-    JComboBox<String> comboBox = new JComboBox<>(new String[]{"1. Insättning", "2. Uttag", "3. Se Sparkonto", "4. Se räntekonto", "5. Ta lån", "6. Ansökan bankomatkort", "7. Kontohistorik", "8. Kundsupport"});
+    JComboBox<String> comboBox = new JComboBox<>(new String[]{"1. Insättning", "2. Uttag", "3. Sparkonto", "4. Lån", "5. Ansök om bankomatkort", "6. Kontohistorik", "7. Kundsupport"});
     JButton button = new JButton("Utför åtgärd");
     private final BankHandler bankHandler;
     private final Customer customer;
@@ -45,14 +45,20 @@ public class BankGUI extends JFrame implements ActionListener{
             case "2. Uttag":
                bankHandler.withdrawMoney();
                 break;
-            case "3. Se Sparkonto":
+            case "3. Sparkonto":
                 bankHandler.manageSavings();
                 break;
-            case  "6. Ansökan bankomatkort":
+            case "4. Lån":
+                bankHandler.manageLoan();
+                break;
+            case  "5. Ansök om bankomatkort":
                 bankHandler.creditCardMenu();
                 break;
-            case  "7. Kontohistorik":
+            case  "6. Kontohistorik":
                 bankHandler.showTransactionHistory();
+                break;
+            case  "7. Kundsupport":
+                bankHandler.showContactInfo();
                 default:
                 break;
         }

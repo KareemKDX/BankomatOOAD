@@ -15,6 +15,10 @@ public void deposit(double amount) {
     }
 }
 
+    public double getBalance() {
+        return balance;
+    }
+
     @Override
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
@@ -25,6 +29,7 @@ public void deposit(double amount) {
         } else {
             System.out.println("Gick inte ta ut pengar. För lite saldo för vald summa");
         }
+
     }
 }
 
