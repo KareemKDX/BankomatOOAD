@@ -10,8 +10,8 @@ public class ATM {
         if (name != null && !name.isEmpty()) {
             SwingUtilities.invokeLater(() -> {
                 Customer customer = new Customer(name);
-                BankHandler bankHandler = BankHandler.getInstance(customer);
-                new BankGUI(bankHandler, customer);
+                BankHandler bankHandler = new BankHandler(customer);
+                BankGUI gui = BankGUI.getInstance(bankHandler, customer);
             });
         } else {
            JOptionPane.showMessageDialog(null,"Du måste skriva in ditt namn!");

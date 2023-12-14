@@ -9,6 +9,7 @@ public class BankGUI extends JFrame implements ActionListener{
     JButton button = new JButton("Utför åtgärd");
     private final BankHandler bankHandler;
     private final Customer customer;
+    private static BankGUI instance;
 
     public BankGUI(BankHandler bankHandler, Customer customer) {
         this.bankHandler = bankHandler;
@@ -29,19 +30,30 @@ public class BankGUI extends JFrame implements ActionListener{
 
         button.addActionListener(this);
     }
+    public static BankGUI getInstance(BankHandler bankHandler, Customer accountHolder) {
+        if (instance == null) {
+            instance = new BankGUI(bankHandler, accountHolder);
+        }
+        return instance;
+    }
 
     private void handleUserChoice(String selectedOption) {
         switch (selectedOption) {
             case "1. Insättning":
-                bankHandler.userStartMenu(1);
+                bankHandler.depositMoney();
                 break;
             case "2. Uttag":
-               bankHandler.userStartMenu(2);
+               bankHandler.withdrawMoney();
                 break;
             case "3. Se Sparkonto":
-                bankHandler.userStartMenu(3);
-
-            default:
+                bankHandler.manageSavings();
+                break;
+            case  "6. Ansökan bankomatkort":
+                bankHandler.creditCardMenu();
+                break;
+            case  "7. Kontohistorik":
+                bankHandler.showTransactionHistory();
+                default:
                 break;
         }
     }
