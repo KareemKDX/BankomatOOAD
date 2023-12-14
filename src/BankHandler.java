@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.util.*;
 
-public class BankHandler implements BankManagerInterface {
+public class BankHandler {
     private double balanceSavingsAccount;
     private double balance;
     private Customer accountHolder;
     TransactionHistory history = new TransactionHistory();
     Customer c;
+    StandardAccount standardAccount = new StandardAccount();
+    SavingsAccount savingsAccount = new SavingsAccount();
+
 
     public BankHandler(Customer accountHolder) {
         this.accountHolder = accountHolder;
@@ -20,7 +23,7 @@ public class BankHandler implements BankManagerInterface {
         return balanceSavingsAccount;
     }
 
-    @Override
+   /* @Override
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
@@ -43,7 +46,7 @@ public class BankHandler implements BankManagerInterface {
         }
     }
 
-    @Override
+    /*@Override
     public void depositSaving(double amount) {
         System.out.println("SPARKONTO");
         if (amount > 0) {
@@ -64,13 +67,14 @@ public class BankHandler implements BankManagerInterface {
             System.out.println("Gick inte ta ut pengar. För lite saldo för vald summa");
         }
 
-    }
+   */
 
     public void depositMoney() {
+
         String userInput = JOptionPane.showInputDialog("Hur mycket vill du sätta in?");
         if (userInput != null) {
             double userDepositSum = Double.parseDouble(userInput);
-            deposit(userDepositSum);
+            standardAccount.deposit(userDepositSum);
         }
     }
 
@@ -78,22 +82,23 @@ public class BankHandler implements BankManagerInterface {
         String userInput = JOptionPane.showInputDialog("Hur mycket vill du ta ut?");
         if (userInput != null) {
             double userWithdrawSum = Double.parseDouble(userInput);
-            withdraw(userWithdrawSum);
+            standardAccount.deposit(userWithdrawSum);
         }
     }
 
     public void manageSavings() {
+
         String[] options = {"Ta ut från konto", "Överför till konto"};
         int userChoice = JOptionPane.showOptionDialog(null, "Vad vill du göra?", "Aktuellt saldo Sparkonto",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
         if (userChoice == 1) {
             double userSum = Double.parseDouble(JOptionPane.showInputDialog("Ange summa att överföra: "));
-            depositSaving(userSum);
+            savingsAccount.deposit(userSum);
 
         } else if (userChoice == 0) {
             double userAmountWithdraw = Double.parseDouble(JOptionPane.showInputDialog("Ange summa att ta ut: "));
-            withdrawSaving(userAmountWithdraw);
+            savingsAccount.deposit(userAmountWithdraw);
 
         }
     }
