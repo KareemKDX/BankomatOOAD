@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.IOException;
 
 public class BankHandler {
    StandardAccount standardAccount = new StandardAccount();
@@ -8,18 +9,28 @@ public class BankHandler {
 
     public void depositMoney() {
 
+    try{
         String userInput = JOptionPane.showInputDialog("Hur mycket vill du sätta in?");
         if (userInput != null) {
             double userDepositSum = Double.parseDouble(userInput);
             standardAccount.deposit(userDepositSum);
         }
+
+    }catch (NumberFormatException e) {
+        System.out.println("Felaktig inmatning");
+    }
+
     }
 
     public void withdrawMoney() {
-        String userInput = JOptionPane.showInputDialog("Hur mycket vill du ta ut?");
-        if (userInput != null) {
-            double userWithdrawSum = Double.parseDouble(userInput);
-            standardAccount.withdraw(userWithdrawSum);
+        try {
+            String userInput = JOptionPane.showInputDialog("Hur mycket vill du ta ut?");
+            if (userInput != null) {
+                double userWithdrawSum = Double.parseDouble(userInput);
+                standardAccount.withdraw(userWithdrawSum);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Felaktig inmatning");
         }
     }
 
