@@ -1,6 +1,6 @@
 public class InterestRate {
-    double BASE_LOAN_RATE = 3.25;
-    double BASE_SAVINGS_RATE = 2.50;
+   private double BASE_LOAN_RATE = 3.25;
+   private double BASE_SAVINGS_RATE = 2.50;
 
     public void showInterestRateSavings(){
         System.out.println("Våran sparkonto-ränta är just nu " + BASE_SAVINGS_RATE + "%.");

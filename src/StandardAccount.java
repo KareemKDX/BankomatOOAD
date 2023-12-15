@@ -2,7 +2,6 @@ public class StandardAccount implements BankManagerInterface{
     private double balance;
     TransactionHistory history = new TransactionHistory();
 
-
 public StandardAccount() {}
 @Override
 public void deposit(double amount) {
@@ -14,11 +13,9 @@ public void deposit(double amount) {
         System.out.println("Invalid deposit amount.");
     }
 }
-
     public double getBalance() {
         return balance;
     }
-
     @Override
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {

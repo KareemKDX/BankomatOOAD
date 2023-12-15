@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.util.Scanner;
-
 public class ATM {
 
     public static void main(String[] args) {
@@ -10,7 +8,7 @@ public class ATM {
         if (name != null && !name.isEmpty()) {
             SwingUtilities.invokeLater(() -> {
                 Customer customer = new Customer(name);
-                BankHandler bankHandler = new BankHandler(customer);
+                BankHandler bankHandler = new BankHandler();
                 BankGUI gui = BankGUI.getInstance(bankHandler, customer);
             });
         } else {

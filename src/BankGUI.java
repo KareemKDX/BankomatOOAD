@@ -3,10 +3,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BankGUI extends JFrame implements ActionListener{
-    JPanel panel = new JPanel();
-    JLabel label = new JLabel("Välkommen");
-    JComboBox<String> comboBox = new JComboBox<>(new String[]{"1. Insättning", "2. Uttag", "3. Sparkonto", "4. Lån", "5. Ansök om bankomatkort", "6. Kontohistorik", "7. Kundsupport"});
-    JButton button = new JButton("Utför åtgärd");
+    private JPanel panel = new JPanel();
+    private JLabel label = new JLabel("Välkommen");
+    private JComboBox<String> comboBox = new JComboBox<>(new String[]{"1. Insättning", "2. Uttag", "3. Sparkonto", "4. Lån", "5. Ansök om bankomatkort", "6. Kontohistorik", "7. Kundsupport"});
+    private JButton button = new JButton("Utför åtgärd");
     private final BankHandler bankHandler;
     private final Customer customer;
     private static BankGUI instance;
@@ -22,7 +22,7 @@ public class BankGUI extends JFrame implements ActionListener{
         this.setVisible(true);
         this.add(panel);
 
-        label.setText("Välkommen " + customer.getName());
+        label.setText("Välkommen " + this.customer.getName());
         panel.add(label);
         panel.add(comboBox);
         panel.add(button);
