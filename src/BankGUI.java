@@ -11,7 +11,7 @@ public class BankGUI extends JFrame implements ActionListener{
     private final Customer customer;
     private static BankGUI instance;
 
-    public BankGUI(BankHandler bankHandler, Customer customer) {
+    private BankGUI(BankHandler bankHandler, Customer customer) {
         this.bankHandler = bankHandler;
         this.customer = customer;
 
