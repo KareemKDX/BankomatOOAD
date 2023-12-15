@@ -9,7 +9,9 @@ public class BankGUI extends JFrame implements ActionListener{
     private JButton button = new JButton("Utför åtgärd");
     private final BankHandler bankHandler;
     private final Customer customer;
-    private static BankGUI instance;
+    //volatile instance så att andra trådar måste vänta tills
+    // den första tråden är färdig med skapandet av instansen.
+    private static volatile BankGUI instance;
 
     private BankGUI(BankHandler bankHandler, Customer customer) {
         this.bankHandler = bankHandler;
@@ -31,8 +33,13 @@ public class BankGUI extends JFrame implements ActionListener{
         button.addActionListener(this);
     }
     public static BankGUI getInstance(BankHandler bankHandler, Customer accountHolder) {
+        //Double-Checked Locking, hoppar över synk när man hämtar en instans som redan är skapad(effektivare program)
         if (instance == null) {
-            instance = new BankGUI(bankHandler, accountHolder);
+            synchronized (BankGUI.class) {
+                if (instance == null) {
+                    instance = new BankGUI(bankHandler, accountHolder);
+                }
+            }
         }
         return instance;
     }
