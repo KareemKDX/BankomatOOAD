@@ -6,6 +6,7 @@ public class BankHandler {
    SavingsAccount savingsAccount = new SavingsAccount();
    Loan loan;
    Calculator randomNumber = new Calculator();
+   String inputErrorMessage =  "Felaktig inmatning, försök igen";
 
     public void depositMoney() {
 
@@ -17,7 +18,8 @@ public class BankHandler {
         }
 
     }catch (NumberFormatException e) {
-        System.out.println("Felaktig inmatning");
+        System.out.println(inputErrorMessage);
+        JOptionPane.showMessageDialog(null,inputErrorMessage);
     }
 
     }
@@ -30,7 +32,9 @@ public class BankHandler {
                 standardAccount.withdraw(userWithdrawSum);
             }
         } catch (NumberFormatException e) {
-            System.out.println("Felaktig inmatning");
+            System.out.println(inputErrorMessage);
+            JOptionPane.showMessageDialog(null,inputErrorMessage);
+
         }
     }
 
@@ -40,6 +44,7 @@ public class BankHandler {
         int userChoice = JOptionPane.showOptionDialog(null, "Vad vill du göra?", "Sparkonto",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
+     try{
         if (userChoice == 0) {
             double userSum = Double.parseDouble(JOptionPane.showInputDialog("Ange summa att överföra: "));
             savingsAccount.deposit(userSum);
@@ -50,7 +55,7 @@ public class BankHandler {
 
         }else if (userChoice == 2){
             savingsAccount.interest.showInterestRateSavings();
-        }else{
+        }else {
             Long savingsAccountnumber = randomNumber.generateRandomNumber();
 
             Object[] optionsSavings = {"JA", "NEJ"};
@@ -61,7 +66,12 @@ public class BankHandler {
                 System.out.println("Ditt nya sparkonto-nummer är: " + savingsAccountnumber);
             }
         }
-    }
+    }catch (NumberFormatException e) {
+         System.out.println("Felaktig inmatning");
+
+         JOptionPane.showMessageDialog(null, "Felaktig inmatning");
+     }
+     }
     public void creditCardMenu() {
         Long creditCardNumber = randomNumber.generateRandomNumber();
 
